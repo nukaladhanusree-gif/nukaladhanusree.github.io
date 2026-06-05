@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nukala Dhanusree | Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ============================================================
+       CSS VARIABLES — Blue & White Theme
+    ============================================================ */
+    :root {
+      --blue-dark:   #0a2342;
+      --blue-mid:    #1a56db;
+      --blue-light:  #3b82f6;
+      --blue-pale:   #dbeafe;
+      --blue-ghost:  #eff6ff;
+      --white:       #ffffff;
+      --text-dark:   #0f172a;
+      --text-body:   #334155;
+      --text-muted:  #64748b;
+      --border:      #e2e8f0;
+      --card-shadow: 0 4px 24px rgba(10, 35, 66, 0.08);
+      --radius:      14px;
+      --transition:  0.3s ease;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body:    'DM Sans', sans-serif;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-body);
+      background: var(--white);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ============================================================
+       NAVIGATION BAR
+    ============================================================ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: box-shadow var(--transition);
+    }
+
+    /* Logo / brand name in nav */
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: var(--blue-dark);
+      letter-spacing: 0.01em;
+    }
+
+    /* Desktop nav links */
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-body);
+      position: relative;
+      padding-bottom: 2px;
+      transition: color var(--transition);
+    }
+
+    /* Underline hover effect */
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 2px;
+      background: var(--blue-light);
+      border-radius: 2px;
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--blue-mid); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Hamburger menu for mobile */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--blue-dark);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* Mobile nav menu (hidden by default) */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 5%;
+      z-index: 999;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: color var(--transition);
+    }
+
+    .mobile-menu a:hover { color: var(--blue-mid); }
+
+    /* ============================================================
+       SECTION SHARED STYLES
+    ============================================================ */
+    section {
+      padding: 100px 5%;
+    }
+
+    /* Offset for fixed nav */
+    section:first-of-type { padding-top: 0; }
+
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--blue-dark);
+      margin-bottom: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .section-divider {
+      width: 52px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blue-mid), var(--blue-light));
+      border-radius: 4px;
+      margin-bottom: 3rem;
+    }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.8rem;
+      border-radius: 50px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      border: 2px solid transparent;
+      letter-spacing: 0.02em;
+    }
+
+    /* Primary solid button */
+    .btn-primary {
+      background: var(--blue-mid);
+      color: var(--white);
+      border-color: var(--blue-mid);
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      border-color: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26, 86, 219, 0.3);
+    }
+
+    /* Outlined button */
+    .btn-outline {
+      background: transparent;
+      color: var(--blue-mid);
+      border-color: var(--blue-mid);
+    }
+
+    .btn-outline:hover {
+      background: var(--blue-ghost);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       HERO / HOME SECTION
+    ============================================================ */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, var(--blue-dark) 0%, #1e3a6e 50%, #1a56db 100%);
+      padding-top: 68px; /* account for nav height */
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative circles in the background */
+    #home::before,
+    #home::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.08;
+      background: var(--white);
+    }
+
+    #home::before {
+      width: 500px; height: 500px;
+      top: -150px; right: -150px;
+    }
+
+    #home::after {
+      width: 300px; height: 300px;
+      bottom: -100px; left: 5%;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+    }
+
+    /* Small badge above heading */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--blue-pale);
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-badge span { font-size: 1rem; }
+
+    .hero-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Italic styled name */
+    .hero-heading em {
+      font-style: italic;
+      color: var(--blue-pale);
+    }
+
+    .hero-intro {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Scroll indicator at bottom */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-hint svg { width: 20px; opacity: 0.6; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ============================================================
+       ABOUT ME SECTION
+    ============================================================ */
+    #about {
+      background: var(--white);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    /* Left column: text */
+    .about-text p {
+      font-size: 1.05rem;
+      color: var(--text-body);
+      margin-bottom: 1.2rem;
+      line-height: 1.8;
+    }
+
+    /* Right column: quick-info cards */
+    .about-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .fact-card {
+      background: var(--blue-ghost);
+      border: 1px solid var(--blue-pale);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.2rem;
+      text-align: center;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .fact-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--card-shadow);
+    }
+
+    .fact-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .fact-value {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--blue-dark);
+    }
+
+    .fact-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ============================================================
+       SKILLS SECTION
+    ============================================================ */
+    #skills {
+      background: var(--blue-ghost);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .skill-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1rem;
+      text-align: center;
+      transition: all var(--transition);
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Top accent bar that slides in on hover */
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blue-mid), var(--blue-light));
+      transform: scaleX(0);
+      transition: transform var(--transition);
+      border-radius: 4px 4px 0 0;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(10, 35, 66, 0.1);
+      border-color: var(--blue-pale);
+    }
+
+    .skill-card:hover::before { transform: scaleX(1); }
+
+    .skill-icon {
+      font-size: 2.4rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .skill-name {
+      font-weight: 600;
+      color: var(--blue-dark);
+      font-size: 1rem;
+    }
+
+    .skill-level {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* Skill progress bar */
+    .skill-bar {
+      margin-top: 0.8rem;
+      height: 4px;
+      background: var(--blue-pale);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue-mid), var(--blue-light));
+      border-radius: 4px;
+      transition: width 1s ease 0.3s;
+    }
+
+    /* ============================================================
+       PROJECTS SECTION
+    ============================================================ */
+    #projects {
+      background: var(--white);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(10, 35, 66, 0.12);
+      border-color: var(--blue-pale);
+    }
+
+    /* Coloured top strip on each project card */
+    .project-header {
+      padding: 1.8rem 1.8rem 1.2rem;
+      background: linear-gradient(135deg, var(--blue-dark), #1a56db);
+      position: relative;
+    }
+
+    .project-number {
+      font-size: 3rem;
+      font-family: var(--font-display);
+      color: rgba(255, 255, 255, 0.15);
+      position: absolute;
+      top: 0.8rem; right: 1.2rem;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .project-icon {
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .project-name {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--white);
+    }
+
+    .project-body {
+      padding: 1.5rem 1.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-desc {
+      font-size: 0.95rem;
+      color: var(--text-body);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Technology tags */
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: var(--blue-ghost);
+      color: var(--blue-mid);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      border: 1px solid var(--blue-pale);
+      letter-spacing: 0.02em;
+    }
+
+    /* ============================================================
+       RESUME SECTION
+    ============================================================ */
+    #resume {
+      background: var(--blue-ghost);
+      text-align: center;
+    }
+
+    .resume-card {
+      max-width: 620px;
+      margin: 0 auto;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3.5rem 3rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .resume-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .resume-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--blue-dark);
+      margin-bottom: 0.8rem;
+    }
+
+    .resume-card p {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-size: 0.97rem;
+    }
+
+    /* ============================================================
+       CONTACT SECTION
+    ============================================================ */
+    #contact {
+      background: var(--white);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      max-width: 600px;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--blue-ghost);
+      border: 1px solid var(--blue-pale);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: all var(--transition);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--card-shadow);
+      border-color: var(--blue-light);
+    }
+
+    .contact-icon-wrap {
+      width: 48px; height: 48px;
+      background: var(--blue-mid);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.3rem;
+    }
+
+    .contact-info label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-info a,
+    .contact-info span {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--blue-dark);
+      word-break: break-all;
+    }
+
+    .contact-info a:hover { color: var(--blue-mid); text-decoration: underline; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--blue-dark);
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+      padding: 2rem 5%;
+      font-size: 0.85rem;
+    }
+
+    footer strong { color: var(--white); }
+
+    /* ============================================================
+       FADE-IN ANIMATION (triggered by JS IntersectionObserver)
+    ============================================================ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger children inside a fade-in container */
+    .fade-in:nth-child(2) { transition-delay: 0.1s; }
+    .fade-in:nth-child(3) { transition-delay: 0.2s; }
+    .fade-in:nth-child(4) { transition-delay: 0.3s; }
+    .fade-in:nth-child(5) { transition-delay: 0.4s; }
+
+    /* ============================================================
+       RESPONSIVE — TABLET
+    ============================================================ */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    /* ============================================================
+       RESPONSIVE — MOBILE
+    ============================================================ */
+    @media (max-width: 640px) {
+      section { padding: 70px 6%; }
+
+      /* Show hamburger, hide desktop links */
+      .hamburger { display: flex; }
+      .nav-links  { display: none; }
+
+      .hero-heading { font-size: 2.2rem; }
+      .hero-intro   { font-size: 1rem; }
+
+      .about-facts { grid-template-columns: 1fr 1fr; }
+
+      .resume-card { padding: 2.5rem 1.5rem; }
+
+      .project-body { padding: 1.2rem 1.4rem; }
+      .project-header { padding: 1.4rem 1.4rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+  ============================================================ -->
+  <nav id="navbar">
+    <!-- Brand name -->
+    <div class="nav-logo">Dhanusree N.</div>
+
+    <!-- Desktop navigation links -->
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <!-- Hamburger button (visible on mobile) -->
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile dropdown menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home"     onclick="closeMobileMenu()">Home</a>
+    <a href="#about"    onclick="closeMobileMenu()">About</a>
+    <a href="#skills"   onclick="closeMobileMenu()">Skills</a>
+    <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+    <a href="#resume"   onclick="closeMobileMenu()">Resume</a>
+    <a href="#contact"  onclick="closeMobileMenu()">Contact</a>
+  </div>
+
+  <!-- ============================================================
+       HOME / HERO SECTION
+  ============================================================ -->
+  <section id="home">
+    <div class="hero-inner">
+
+      <!-- Small badge -->
+      <div class="hero-badge">
+        <span>👩‍💻</span> Computer Science Student
+      </div>
+
+      <!-- Main heading -->
+      <h1 class="hero-heading">
+        Hi, I'm<br/>
+        <em>Nukala Dhanusree</em>
+      </h1>
+
+      <!-- Short introduction -->
+      <p class="hero-intro">
+        I am a Computer Science student passionate about technology
+        and software development.
+      </p>
+
+      <!-- Call-to-action buttons -->
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects ↓</a>
+        <a href="#contact"  class="btn btn-outline" style="color:#dbeafe;border-color:rgba(255,255,255,0.4);">
+          Contact Me
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll-down hint -->
+    <div class="scroll-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+      Scroll
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT ME SECTION
+  ============================================================ -->
+  <section id="about">
+    <p class="section-label">Get to know me</p>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-divider"></div>
+
+    <div class="about-grid">
+
+      <!-- Text column -->
+      <div class="about-text fade-in">
+        <p>
+          I enjoy learning new technologies, building projects, and improving
+          my programming skills. I am interested in software development and
+          always look for opportunities to grow as a developer.
+        </p>
+        <p>
+          As a Computer Science student, I work on hands-on projects that
+          sharpen my problem-solving abilities and broaden my understanding
+          of real-world applications.
+        </p>
+        <a href="#contact" class="btn btn-primary" style="margin-top:0.5rem;">
+          Let's Connect →
+        </a>
+      </div>
+
+      <!-- Quick-fact cards column -->
+      <div class="about-facts fade-in">
+        <div class="fact-card">
+          <div class="fact-icon">🎓</div>
+          <div class="fact-value">CS</div>
+          <div class="fact-label">Major</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">💻</div>
+          <div class="fact-value">5+</div>
+          <div class="fact-label">Skills</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">🚀</div>
+          <div class="fact-value">3</div>
+          <div class="fact-label">Projects</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">🌱</div>
+          <div class="fact-value">Open</div>
+          <div class="fact-label">to Learn</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SKILLS SECTION
+  ============================================================ -->
+  <section id="skills">
+    <p class="section-label">What I know</p>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-divider"></div>
+
+    <div class="skills-grid">
+
+      <!-- Skill Card: C -->
+      <div class="skill-card fade-in">
+        <span class="skill-icon">⚙️</span>
+        <div class="skill-name">C</div>
+        <div class="skill-level">Procedural Programming</div>
+        <div class="skill-bar">
+          <div class="skill-bar-fill" style="width:70%"></div>
+        </div>
+      </div>
+
+      <!-- Skill Card: Java -->
+      <div class="skill-card fade-in">
+        <span class="skill-icon">☕</span>
+        <div class="skill-name">Java</div>
+        <div class="skill-level">Object-Oriented</div>
+        <div class="skill-bar">
+          <div class="skill-bar-fill" style="width:65%"></div>
+        </div>
+      </div>
+
+      <!-- Skill Card: HTML -->
+      <div class="skill-card fade-in">
+        <span class="skill-icon">🌐</span>
+        <div class="skill-name">HTML</div>
+        <div class="skill-level">Web Structure</div>
+        <div class="skill-bar">
+          <div class="skill-bar-fill" style="width:80%"></div>
+        </div>
+      </div>
+
+      <!-- Skill Card: CSS -->
+      <div class="skill-card fade-in">
+        <span class="skill-icon">🎨</span>
+        <div class="skill-name">CSS</div>
+        <div class="skill-level">Styling & Layout</div>
+        <div class="skill-bar">
+          <div class="skill-bar-fill" style="width:75%"></div>
+        </div>
+      </div>
+
+      <!-- Skill Card: JavaScript -->
+      <div class="skill-card fade-in">
+        <span class="skill-icon">⚡</span>
+        <div class="skill-name">JavaScript</div>
+        <div class="skill-level">Web Interactivity</div>
+        <div class="skill-bar">
+          <div class="skill-bar-fill" style="width:60%"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECTS SECTION
+  ============================================================ -->
+  <section id="projects">
+    <p class="section-label">My work</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-divider"></div>
+
+    <div class="projects-grid">
+
+      <!-- Project 1 -->
+      <div class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-number">01</div>
+          <div class="project-icon">🛒</div>
+          <h3 class="project-name">Online Shopping Cart</h3>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">
+            A simple e-commerce shopping cart web application where users can
+            browse products, add them to a cart, and view the total price.
+            Features a clean, interactive UI with dynamic updates.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-number">02</div>
+          <div class="project-icon">📋</div>
+          <h3 class="project-name">Student Management System</h3>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">
+            A console-based application built in Java that helps manage student
+            records — adding, removing, searching, and displaying student
+            information using object-oriented programming concepts.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">Java</span>
+            <span class="tag">OOP</span>
+            <span class="tag">Console App</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-number">03</div>
+          <div class="project-icon">☀️</div>
+          <h3 class="project-name">Weather Dashboard</h3>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">
+            An interactive weather information dashboard that displays current
+            weather conditions with a clean visual interface.
+            Demonstrates DOM manipulation and responsive design techniques.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RESUME SECTION
+  ============================================================ -->
+  <section id="resume">
+    <p class="section-label">My credentials</p>
+    <h2 class="section-title">Resume</h2>
+    <div class="section-divider"></div>
+
+    <div class="resume-card fade-in">
+      <div class="resume-icon">📄</div>
+      <h3>Download My Resume</h3>
+      <p>
+        Get a detailed overview of my education, skills, projects, and
+        achievements in one document. Perfect for internship or placement applications.
+      </p>
+      <!--
+        Replace "Nukala_Dhanusree_Resume.pdf" with the actual path
+        to your resume PDF file before sharing this portfolio.
+      -->
+      <a href="Nukala_Dhanusree_Resume.pdf" download class="btn btn-primary">
+        ⬇ Download Resume
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT SECTION
+  ============================================================ -->
+  <section id="contact">
+    <p class="section-label">Reach out</p>
+    <h2 class="section-title">Contact Me</h2>
+    <div class="section-divider"></div>
+
+    <div class="contact-grid">
+
+      <!-- Email -->
+      <div class="contact-card fade-in">
+        <div class="contact-icon-wrap">📧</div>
+        <div class="contact-info">
+          <label>Email</label>
+          <!--
+            Replace the email address below with your actual email.
+          -->
+          <a href="mailto:dhanusree@example.com">dhanusree@example.com</a>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="contact-card fade-in">
+        <div class="contact-icon-wrap" style="background:#0a2342;">📞</div>
+        <div class="contact-info">
+          <label>Phone</label>
+          <!--
+            Replace the phone number below with your actual number.
+          -->
+          <span>+91 98765 43210</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <p>
+      Designed &amp; built with ❤️ by <strong>Nukala Dhanusree</strong> · 2025
+    </p>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    /* ----------------------------------------------------------
+       1. HAMBURGER MENU — toggle mobile navigation
+    ---------------------------------------------------------- */
+    const hamburger   = document.getElementById('hamburger');
+    const mobileMenu  = document.getElementById('mobileMenu');
+
+    // Toggle the menu open/closed when hamburger is clicked
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Helper function called by each mobile link to close the menu
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+    }
+
+    /* ----------------------------------------------------------
+       2. NAVBAR SHADOW — add shadow when scrolled
+    ---------------------------------------------------------- */
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        navbar.style.boxShadow = '0 4px 20px rgba(10,35,66,0.08)';
+      } else {
+        navbar.style.boxShadow = 'none';
+      }
+    });
+
+    /* ----------------------------------------------------------
+       3. INTERSECTION OBSERVER — fade-in elements on scroll
+    ---------------------------------------------------------- */
+    const fadeEls = document.querySelectorAll('.fade-in');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // fire once
+          }
+        });
+      },
+      { threshold: 0.15 }  // trigger when 15% of the element is visible
+    );
+
+    // Observe every fade-in element
+    fadeEls.forEach(el => observer.observe(el));
+
+    /* ----------------------------------------------------------
+       4. SKILL BAR ANIMATION — animate progress bars on scroll
+    ---------------------------------------------------------- */
+    const skillBars = document.querySelectorAll('.skill-bar-fill');
+
+    // Store the target widths and reset them initially
+    const targetWidths = Array.from(skillBars).map(bar => bar.style.width);
+    skillBars.forEach(bar => { bar.style.width = '0'; });
+
+    const barObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            // Animate to the original target width after a short delay
+            setTimeout(() => {
+              entry.target.style.width = targetWidths[
+                Array.from(skillBars).indexOf(entry.target)
+              ];
+            }, 200);
+            barObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    skillBars.forEach(bar => barObserver.observe(bar));
+  </script>
+
+</body>
+</html>
